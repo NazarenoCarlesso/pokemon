@@ -43,4 +43,16 @@ const pokemonById = async (req, res) => {
     res.status(200).json(pokemon)
 }
 
-module.exports = { pokemonAll, pokemonById }
+const pokemonCreate = async (req, res) => {
+    const { name, height, weight, image, health,
+        attack, defense, speed, types } = req.body
+
+    const newPokemon = await Pokemon.create({
+        name, height, weight, image, health,
+        attack, defense, speed
+    })
+
+    res.status(201).json(newPokemon)
+}
+
+module.exports = { pokemonAll, pokemonById, pokemonCreate }

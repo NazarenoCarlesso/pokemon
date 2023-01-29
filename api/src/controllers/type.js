@@ -4,7 +4,7 @@ const typeAll = async (req, res) => {
     const types = await fetch('https://pokeapi.co/api/v2/type')
         .then(response => response.json())
 
-    res.status(200).json(types.results)
+    res.status(200).json(types.results.map(t => t.name))
 }
 
 module.exports = { typeAll }
