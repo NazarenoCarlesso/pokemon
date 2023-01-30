@@ -1,22 +1,32 @@
-const { Pokemon } = require('../db.js')
+const { Pokemon, Type } = require('../db.js')
 
 const pokemonAll = async (req, res) => {
-    const pokemons = []
+    let pokemons = []
 
-    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=40')
+    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
         .then(response => response.json())
         .then(data => data.results.map(r => r.url))
 
     await Promise.all(pokemonUrls.map(url => fetch(url)
         .then(response => response.json())
-        .then(data => {
-            pokemons.push({
-                id: data.id,
-                name: data.name,
-                image: data.sprites.front_default,
-                types: data.types.map(t => t.type.name)
-            })
-        })
+        .then(data => pokemons.push({
+            id: data.id,
+            name: data.name,
+            image: data.sprites.front_default,
+            types: data.types.map(t => t.type.name)
+        }))
+    ))
+
+    const pokemonsDatabase = await Pokemon.findAll()
+
+    await Promise.all(pokemonsDatabase.map(pokemon => pokemon.getTypes()
+        .then(types => ({ ...pokemon.dataValues, types: types }))
+        .then(data => pokemons.push({
+            id: data.id,
+            name: data.name,
+            image: data.image,
+            types: data.types.map(t => t.dataValues.name)
+        }))
     ))
 
     res.status(200).json(pokemons)
@@ -48,9 +58,15 @@ const pokemonCreate = async (req, res) => {
         attack, defense, speed, types } = req.body
 
     const newPokemon = await Pokemon.create({
-        name, height, weight, image, health,
-        attack, defense, speed
+        name, height, weight, image,
+        health, attack, defense, speed
     })
+
+    Promise.all(
+        types.map(type => Type.findOne({ where: { name: type } })
+            .then(type => type.dataValues.id)
+            .then(id => newPokemon.addType(id, { through: 'pokemon_type' })))
+    )
 
     res.status(201).json(newPokemon)
 }

@@ -1,10 +1,16 @@
 const { Type } = require('../db.js')
 
 const typeAll = async (req, res) => {
-    const types = await fetch('https://pokeapi.co/api/v2/type')
+    const { results } = await fetch('https://pokeapi.co/api/v2/type')
         .then(response => response.json())
 
-    res.status(200).json(types.results.map(t => t.name))
+    const types = results.map(type => type.name)
+
+    await Promise.all(
+        types.map(type => Type.findOrCreate({ where: { name: type } }))
+    )
+
+    res.status(200).json(types)
 }
 
 module.exports = { typeAll }
