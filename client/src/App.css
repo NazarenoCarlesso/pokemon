@@ -32,7 +32,23 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.Row {
+  display: flex;
+  flex-direction: row;
+}
+
+.PokemonBar {
+  background-color: black;
+  color: whitesmoke;
+  padding: 4px;
+}
+
+.PokemonBar h1 {
+  font-weight: 400;
 }

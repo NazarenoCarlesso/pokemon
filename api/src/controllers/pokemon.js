@@ -22,7 +22,7 @@ const pokemonAll = async (req, res) => {
     await Promise.all(pokemonsDatabase.map(pokemon => pokemon.getTypes()
         .then(types => ({ ...pokemon.dataValues, types: types }))
         .then(data => pokemons.push({
-            id: data.id,
+            id: data.id + 1279,
             name: data.name,
             image: data.image,
             types: data.types.map(t => t.dataValues.name)
@@ -35,20 +35,34 @@ const pokemonAll = async (req, res) => {
 const pokemonById = async (req, res) => {
     const { id } = req.params
 
-    const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-        .then(response => response.json())
-        .then(data => ({
-            id: data.id,
-            name: data.name,
-            height: data.height,
-            weight: data.weight,
-            image: data.sprites.other.home.front_default,
-            types: data.types.map(t => t.type.name),
-            health: data.stats[0].base_stat,
-            attack: data.stats[1].base_stat,
-            defense: data.stats[2].base_stat,
-            speed: data.stats[5].base_stat
-        }))
+    let pokemon
+
+    if (id > 1279) {
+        pokemon = await Pokemon.findByPk(Number(id) - 1279)
+            .then(pokemon => pokemon.getTypes()
+                .then(types => ({ ...pokemon.dataValues, types: types }))
+                .then(data => ({
+                    ...data,
+                    id: data.id + 1279,
+                    types: data.types.map(t => t.dataValues.name)
+                }))
+            )
+    } else {
+        pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+            .then(response => response.json())
+            .then(data => ({
+                id: data.id,
+                name: data.name,
+                height: data.height,
+                weight: data.weight,
+                image: data.sprites.other.home.front_default,
+                types: data.types.map(t => t.type.name),
+                health: data.stats[0].base_stat,
+                attack: data.stats[1].base_stat,
+                defense: data.stats[2].base_stat,
+                speed: data.stats[5].base_stat
+            }))
+    }
 
     res.status(200).json(pokemon)
 }
