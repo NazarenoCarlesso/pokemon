@@ -1,9 +1,12 @@
+require('dotenv').config()
 const { Pokemon, Type } = require('../db.js')
+// limita la cantidad de pokemons a traer de la API
+const { FETCH_LIMIT } = process.env
 
 const pokemonAll = async (req, res) => {
     let pokemons = []
 
-    const pokemonUrls = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+    const pokemonUrls = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${FETCH_LIMIT}`)
         .then(response => response.json())
         .then(data => data.results.map(r => r.url))
 
