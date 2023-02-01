@@ -16,6 +16,7 @@ const pokemonAll = async (req, res) => {
             id: data.id,
             name: data.name,
             image: data.sprites.front_default,
+            attack: data.stats[1].base_stat,
             types: data.types.map(t => t.type.name)
         }))
     ))
@@ -32,7 +33,7 @@ const pokemonAll = async (req, res) => {
         }))
     ))
 
-    res.status(200).json(pokemons)
+    res.status(200).json(pokemons.sort((a, b) => a.id - b.id))
 }
 
 const pokemonById = async (req, res) => {

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { apiFilter, changePage, typesFilter } from '../redux/actions'
+import { changePage, filterApi, filterOrder, filterRestart, filterType } from '../redux/actions'
+import Filter from './Filter'
 import Pokedex from './Pokedex'
 
 export default function Home() {
@@ -11,49 +12,30 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     React.useEffect(() => dispatch(changePage(page[0])), [page])
 
-    const typesAll = useSelector(state => state.typesAll)
-    const [types, setTypes] = React.useState(typesAll)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    React.useEffect(() => dispatch(typesFilter(types)), [types])
+    const types = ['all', 'normal', 'fighting', 'flying', 'poison', 'ground',
+        'rock', 'bug', 'ghost', 'steel', 'fire', 'water', 'grass', 'electric',
+        'psychic', 'ice', 'dragon', 'dark', 'fairy', 'shadow']
+    const apis = ['all', 'existent', 'created']
+    const orders = ['id +', 'id -', 'name +', 'name -', 'attack +', 'attack -']
 
-    const originsAll = ['PokeAPI', 'Postgre']
-    const [origins, setOrigins] = React.useState(originsAll)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    React.useEffect(() => dispatch(apiFilter(origins)), [origins])
+    const [type, setType] = useState('all')
+    const [api, setApi] = useState('all')
+    const [order, setOrder] = useState('id +')
 
-    React.useEffect(() => setPage([1]), [types, origins])
-
-    const handleType = (type) => {
-        types.includes(type)
-            ? setTypes(types.filter(t => t !== type))
-            : setTypes([...types, type])
-    }
-
-    const handleOrigin = (origin) => {
-        origins.includes(origin)
-            ? setOrigins(origins.filter(o => o !== origin))
-            : setOrigins([...origins, origin])
-    }
+    useEffect(() => {
+        dispatch(filterRestart())
+        dispatch(filterType(type))
+        dispatch(filterApi(api))
+        dispatch(filterOrder(order))
+        setPage([1])
+    }, [dispatch, type, api, order])
 
     return (
         <div>
             <h1>Home</h1>
-            <div className='Row'>
-                {typesAll.map((type, index) =>
-                    <button key={index}
-                        className={types.includes(type) ? 'Selected' : null}
-                        onClick={() => handleType(type)}
-                    >{type}</button>
-                )}
-            </div>
-            <div className='Row'>
-                {originsAll.map((origin, index) =>
-                    <button key={index}
-                        className={origins.includes(origin) ? 'Selected' : null}
-                        onClick={() => handleOrigin(origin)}
-                    >{origin}</button>
-                )}
-            </div>
+            <Filter all={types} state={type} setState={setType} />
+            <Filter all={apis} state={api} setState={setApi} />
+            <Filter all={orders} state={order} setState={setOrder} />
             <div className='Row'>
                 <button onClick={() => setPage([page[0] - 1])}>{'<'}</button>
                 {page}

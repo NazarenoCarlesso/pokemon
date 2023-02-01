@@ -1,34 +1,38 @@
 const initialState = {
     pokemonAll: [],
     pokemonFilter: [],
-    pokemonPage: [],
-    typesAll: []
+    pokemonPage: []
 }
 
 const reducer = (state = initialState, { type, payload }) => {
-    console.log(`reducer: ${type}`)
+    // console.log(`reducer: ${type}`)
     switch (type) {
         case 'POKEMONS_ALL':
-            return { ...state, pokemonAll: payload }
-        case 'TYPES_ALL':
-            return { ...state, typesAll: payload }
-        case 'TYPES_FILTER':
-            const typesFilter = state.pokemonAll.filter(pokemon =>
-                pokemon.types.some(t => payload.includes(t)))
-            return { ...state, pokemonFilter: typesFilter }
-        case 'API_FILTER':
-            if (payload.length === 2) return { ...state, pokemonFilter: state.pokemonAll }
-            if (payload[0] === 'PokeAPI') return { ...state, pokemonFilter: state.pokemonAll.filter(p => p.id <= 600) }
-            if (payload[0] === 'Postgre') return { ...state, pokemonFilter: state.pokemonAll.filter(p => p.id > 600) }
-            return { ...state, pokemonFilter: [] }
+            console.log('%cpokemons loaded successfully', "color: cyan")
+            return { ...state, pokemonAll: payload, pokemonFilter: payload }
+        case 'FILTER_RESTART':
+            // console.log('pokemons filter restart')
+            return { ...state, pokemonFilter: state.pokemonAll }
+        case 'FILTER_TYPE':
+            if (payload === 'all') return { ...state }
+            const filterType = state.pokemonFilter.filter(pokemon => pokemon.types.includes(payload))
+            return { ...state, pokemonFilter: filterType }
+        case 'FILTER_API':
+            if (payload === 'existent') return { ...state, pokemonFilter: state.pokemonFilter.filter(p => p.id <= 600) }
+            if (payload === 'created') return { ...state, pokemonFilter: state.pokemonFilter.filter(p => p.id > 600) }
+            return { ...state }
+        case 'FILTER_ORDER':
+            if (payload === 'id +') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.id - b.id) }
+            if (payload === 'id -') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => b.id - a.id) }
+            if (payload === 'name +') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.name > b.name ? 1 : -1) }
+            if (payload === 'name -') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.name > b.name ? -1 : 1) }
+            if (payload === 'attack +') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.attack > b.attack ? 1 : -1) }
+            if (payload === 'attack -') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.attack > b.attack ? -1 : 1) }
+            return { ...state }
         case 'CHANGE_PAGE':
-            payload = payload - 1
-            const start = payload * 12
-            const end = payload * 12 + 12
-            return {
-                ...state,
-                pokemonPage: state.pokemonFilter.slice(start, end)
-            }
+            // console.log('pokemons page change')
+            const index = (payload - 1) * 12
+            return { ...state, pokemonPage: state.pokemonFilter.slice(index, index + 12) }
         default:
             return { ...state }
     }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { pokemonsAll, typesAll } from '../redux/actions'
+import { pokemonsAll } from '../redux/actions'
 
 export default function Landing() {
     const dispatch = useDispatch()
@@ -10,10 +10,6 @@ export default function Landing() {
         fetch('http://localhost:3001/pokemons')
             .then(response => response.json())
             .then(pokemons => dispatch(pokemonsAll(pokemons)))
-
-        fetch('http://localhost:3001/types')
-            .then(response => response.json())
-            .then(types => dispatch(typesAll(types)))
     })
 
     return (

@@ -3,19 +3,23 @@ export const pokemonsAll = (pokemons) => ({
     payload: pokemons
 })
 
-export const typesAll = (types) => ({
-    type: 'TYPES_ALL',
-    payload: types
+export const filterRestart = () => ({
+    type: 'FILTER_RESTART'
 })
 
-export const typesFilter = (types) => ({
-    type: 'TYPES_FILTER',
-    payload: types
+export const filterType = (type) => ({
+    type: 'FILTER_TYPE',
+    payload: type
 })
 
-export const apiFilter = (apis) => ({
-    type: 'API_FILTER',
-    payload: apis
+export const filterApi = (api) => ({
+    type: 'FILTER_API',
+    payload: api
+})
+
+export const filterOrder = (order) => ({
+    type: 'FILTER_ORDER',
+    payload: order
 })
 
 export const changePage = (page) => ({
