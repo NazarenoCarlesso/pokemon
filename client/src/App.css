@@ -20,3 +20,7 @@
 .PokemonBar h1 {
   font-weight: 400;
 }
+
+.Selected {
+  background-color: red;
+}
