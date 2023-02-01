@@ -15,9 +15,7 @@ const modelDefiners = []
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(__dirname, '/models'))
   .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
-  .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, '/models', file)))
-  })
+  .forEach((file) => modelDefiners.push(require(path.join(__dirname, '/models', file))))
 
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize))
@@ -31,7 +29,7 @@ sequelize.models = Object.fromEntries(capsEntries)
 const { Pokemon, Type } = sequelize.models
 
 // Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+// Relacion M:N entre Pokemon y Type
 Pokemon.belongsToMany(Type, { through: 'pokemon_type' })
 Type.belongsToMany(Pokemon, { through: 'pokemon_type' })
 

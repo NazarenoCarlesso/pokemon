@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom'
 import { pokemonsAll } from '../redux/actions'
 
 export default function Landing() {
+    // dispatch Hook
     const dispatch = useDispatch()
-
+    // Load Pokemons Effect
     useEffect(() => {
         fetch('http://localhost:3001/pokemons')
             .then(response => response.json())
             .then(pokemons => dispatch(pokemonsAll(pokemons)))
     })
-
+    // landing Render
     return (
         <div className='Row'>
             <div>

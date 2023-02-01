@@ -3,6 +3,7 @@ const initialState = {
     pokemonFilter: [],
     pokemonPage: []
 }
+const limit = 900
 
 const reducer = (state = initialState, { type, payload }) => {
     // console.log(`reducer: ${type}`)
@@ -18,8 +19,8 @@ const reducer = (state = initialState, { type, payload }) => {
             const filterType = state.pokemonFilter.filter(pokemon => pokemon.types.includes(payload))
             return { ...state, pokemonFilter: filterType }
         case 'FILTER_API':
-            if (payload === 'existent') return { ...state, pokemonFilter: state.pokemonFilter.filter(p => p.id <= 600) }
-            if (payload === 'created') return { ...state, pokemonFilter: state.pokemonFilter.filter(p => p.id > 600) }
+            if (payload === 'existent') return { ...state, pokemonFilter: state.pokemonFilter.filter(p => p.id <= limit) }
+            if (payload === 'created') return { ...state, pokemonFilter: state.pokemonFilter.filter(p => p.id > limit) }
             return { ...state }
         case 'FILTER_ORDER':
             if (payload === 'id +') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.id - b.id) }
