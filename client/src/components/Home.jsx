@@ -47,11 +47,16 @@ export default function Home() {
         <div>
             <h1>Home</h1>
             {/* search */}
-            <input value={input} onChange={handleChange} onKeyDown={handleKeyDown} />
+            <div className='Filters'>
+                <h5 style={{ margin: 0, marginBottom: 6 }}>Search a pokemon by it's name</h5>
+                <input value={input} onChange={handleChange} onKeyDown={handleKeyDown} />
+            </div>
             {/* filtros */}
-            <Filter all={types} state={type} setState={setType} />
-            <Filter all={apis} state={api} setState={setApi} />
-            <Filter all={orders} state={order} setState={setOrder} />
+            <div className='Filters'>
+                <Filter name='Type' all={types} state={type} setState={setType} />
+                <Filter name='API' all={apis} state={api} setState={setApi} />
+                <Filter name='Order' all={orders} state={order} setState={setOrder} />
+            </div>
             {/* paginado */}
             <div className='Row'>
                 <button onClick={() => setPage([page[0] - 1])}>{'<'}</button>

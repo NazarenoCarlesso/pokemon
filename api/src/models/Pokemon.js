@@ -14,7 +14,10 @@ module.exports = (sequelize) => {
         isLowercase: true
       }
     },
-    image: {
+    imagePokedex: {
+      type: DataTypes.STRING(255)
+    },
+    imageDetail: {
       type: DataTypes.STRING(255)
     },
     health: {

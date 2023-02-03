@@ -18,7 +18,7 @@ const pokemonAll = async (req, res) => {
         .then(data => pokemons.push({
             id: data.id,
             name: data.name,
-            image: data.sprites.front_default,
+            imagePokedex: data.sprites.front_default,
             attack: data.stats[1].base_stat,
             types: data.types.map(t => t.type.name)
         }))
@@ -29,9 +29,9 @@ const pokemonAll = async (req, res) => {
     await Promise.all(pokemonsDatabase.map(pokemon => pokemon.getTypes()
         .then(types => ({ ...pokemon.dataValues, types: types }))
         .then(data => pokemons.push({
-            id: data.id + FETCH_LIMIT,
+            id: data.id + Number(FETCH_LIMIT),
             name: data.name,
-            image: data.image,
+            imagePokedex: data.imagePokedex,
             types: data.types.map(t => t.dataValues.name)
         }))
     ))
@@ -45,13 +45,13 @@ const pokemonById = async (req, res) => {
     // extraemos el pokemon fuera del if
     let pokemon
     // determina donde hay que buscarlo
-    if (id > FETCH_LIMIT) { // en DB
-        pokemon = await Pokemon.findByPk(Number(id) - FETCH_LIMIT)
+    if (id > Number(FETCH_LIMIT)) { // en DB
+        pokemon = await Pokemon.findByPk(Number(id) - Number(FETCH_LIMIT))
             .then(pokemon => pokemon.getTypes()
                 .then(types => ({ ...pokemon.dataValues, types: types }))
                 .then(data => ({
                     ...data,
-                    id: data.id + 1279,
+                    id: data.id + Number(FETCH_LIMIT),
                     types: data.types.map(t => t.dataValues.name)
                 }))
             )
@@ -63,7 +63,8 @@ const pokemonById = async (req, res) => {
                 name: data.name,
                 height: data.height,
                 weight: data.weight,
-                image: data.sprites.other.home.front_default,
+                imagePokedex: data.sprites.front_default,
+                imageDetail: data.sprites.other.home.front_default,
                 types: data.types.map(t => t.type.name),
                 health: data.stats[0].base_stat,
                 attack: data.stats[1].base_stat,
@@ -77,11 +78,11 @@ const pokemonById = async (req, res) => {
 
 const pokemonCreate = async (req, res) => {
     // debo recibir los parametros en el body de la request
-    const { name, height, weight, image, health,
-        attack, defense, speed, types } = req.body
+    const { name, height, weight, imagePokedex, imageDetail,
+        health, attack, defense, speed, types } = req.body
     // creo un pokemon con los datos
     const newPokemon = await Pokemon.create({
-        name, height, weight, image,
+        name, height, weight, imagePokedex, imageDetail,
         health, attack, defense, speed
     })
     // le agrego al pokemon los distintos tipos

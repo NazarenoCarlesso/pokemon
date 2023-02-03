@@ -14,9 +14,9 @@ export default function Detail() {
             .then(data => setPokemon(data))
     }, [id])
 
-    useEffect(() => console.log(pokemon), [pokemon])
+    // useEffect(() => console.log(pokemon), [pokemon])
 
-    const { name, image, types, height, weight, health, attack, defense, speed } = pokemon
+    const { name, imageDetail, types, height, weight, health, attack, defense, speed } = pokemon
     return (
         <div className='Row'>
             <div style={{ width: 300 }}>
@@ -34,7 +34,7 @@ export default function Detail() {
                 <div className='PokemonBar' >
                     <h1 style={{ margin: 0 }}>{name} N.° {id}</h1>
                 </div>
-                <img src={image} alt={name} />
+                <img src={imageDetail} alt={name} />
             </div>
         </div>
     )
