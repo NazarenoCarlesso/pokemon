@@ -44,26 +44,35 @@ export default function Home() {
     }
     // home Render
     return (
-        <div>
+        <div className='Page'>
             <h1>Home</h1>
-            {/* search */}
-            <div className='Filters'>
-                <h5 style={{ margin: 0, marginBottom: 6 }}>Search a pokemon by it's name</h5>
-                <input value={input} onChange={handleChange} onKeyDown={handleKeyDown} />
-            </div>
-            {/* filtros */}
-            <div className='Filters'>
-                <Filter name='Type' all={types} state={type} setState={setType} />
-                <Filter name='API' all={apis} state={api} setState={setApi} />
-                <Filter name='Order' all={orders} state={order} setState={setOrder} />
-            </div>
-            {/* paginado */}
             <div className='Row'>
-                <button onClick={() => setPage([page[0] - 1])}>{'<'}</button>
-                {page}
-                <button onClick={() => setPage([page[0] + 1])}>{'>'}</button>
+                <div>
+                    {/* search */}
+                    <div className='Paper' style={{ width: 360 }}>
+                        <h5 style={{ margin: 0, marginBottom: 6 }}>Search a pokemon by it's name</h5>
+                        <input value={input} onChange={handleChange} onKeyDown={handleKeyDown} />
+                    </div>
+                    {/* filtros */}
+                    <div className='Paper' style={{ width: 360 }}>
+                        <Filter name='Type' all={types} state={type} setState={setType} />
+                        <Filter name='API' all={apis} state={api} setState={setApi} />
+                        <Filter name='Order' all={orders} state={order} setState={setOrder} />
+                    </div>
+                    {/* paginado */}
+                    <div className='Paper Row' style={{ width: 360 }}>
+                        <button onClick={() => setPage([page[0] - 1])}>{'<'}</button>
+                        {page}
+                        <button onClick={() => setPage([page[0] + 1])}>{'>'}</button>
+                    </div>
+                </div>
+                <div style={{ height: 350 }}>
+                    {/* pokedex */}
+                    <div className='Paper' style={{ width: 624, height: 311 }}>
+                        <Pokedex pokemons={pokemons} />
+                    </div>
+                </div>
             </div>
-            <Pokedex pokemons={pokemons} />
         </div>
     )
 }

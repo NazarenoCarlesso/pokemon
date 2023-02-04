@@ -1,6 +1,21 @@
+.Page {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
 .Row {
   display: flex;
   flex-direction: row;
+}
+
+.Center {
+  align-items: center;
+  justify-content: center;
 }
 
 .Discover {
@@ -21,11 +36,11 @@
   font-weight: 400;
 }
 
-.Filters {
-  background-color: #1e1e1e;
-  border: 3px solid #ffffff0d;
+.Paper {
+  background-color: #00132a;
+  border: 3px solid #0066ff;
+  box-shadow: 0px 0px 16px 0px #0037ff80;
   border-radius: 0.5rem;
-  width: 360px;
   padding: 10px;
   margin: 6px;
 }
@@ -36,14 +51,40 @@
 }
 
 .Filter button {
-  background-color: #272727;
+  background-color: #001b3c;
   border: 2px solid #ffffff0d;
   border-radius: 0.25rem;
   margin: 1px;
   text-shadow: 0px 1px 4px #000000fa;
-  box-shadow: 0px 1px 6px #000000b3;
+  box-shadow: 0px 1px 6px 1px #000000b3;
 }
 
 .Filter .Selected {
-  background-color: #363636;
+  background-color: #00224b;
+}
+
+.Type {
+  padding: 4px 4px 2px 4px;
+  border-radius: 3rem;
+  border: 1px solid #ffffff0f;
+}
+
+.Pokemon {
+  background-color: #001b3c;
+  margin: 2px;
+  border-radius: 0.5rem;
+  border: 2px solid #ffffff0d;
+  text-align: center;
+}
+
+.BarContainer {
+  flex-grow: 1;
+  background-color: #00000047;
+  height: 10px;
+  border-radius: 3rem;
+  margin: 0px 6px;
+}
+
+.Bar {
+  border-radius: 3rem;
 }

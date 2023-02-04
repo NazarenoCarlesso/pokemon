@@ -10,7 +10,7 @@ const reducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case 'POKEMONS_ALL':
             console.log('%cpokemons loaded successfully', "color: cyan")
-            return { ...state, pokemonAll: payload, pokemonFilter: payload }
+            return { ...state, pokemonAll: payload, pokemonFilter: payload, pokemonPage: payload.slice(0, 12) }
         case 'FILTER_RESTART':
             // console.log('pokemons filter restart')
             return { ...state, pokemonFilter: state.pokemonAll }

@@ -43,126 +43,130 @@ export default function Create() {
     }
     // create Render
     return (
-        <div>
+        <div className='Page'>
             <h1>Create Pokemon</h1>
-            <form onSubmit={handleSubmit} style={{ display: 'grid' }}>
-                <label>
-                    Name:
-                    <input
-                        value={pokemon.name}
-                        onChange={handleChange}
-                        name='name'
-                        type='text'
-                    />
-                </label>
-                <label>
-                    Pokedex Image Url:
-                    <input value={pokemon.imagePokedex}
-                        onChange={handleChange}
-                        name='imagePokedex'
-                        type='url'
-                    />
-                </label>
-                <label>
-                    Detail Image Url:
-                    <input
-                        value={pokemon.imageDetail}
-                        onChange={handleChange}
-                        name='imageDetail'
-                        type='url'
-                    />
-                </label>
-                <label>
-                    Primary Type:
-                    <select
-                        value={pokemon.types[0]}
-                        onChange={event => handleChange({
-                            target: {
-                                name: event.target.name,
-                                value: [event.target.value, pokemon.types[1]]
-                            }
-                        })}
-                        name='types'>
-                        {typesSelect.map((type, index) =>
-                            <option key={index} value={type}>{type}</option>
-                        )}
-                    </select>
-                </label>
-                <label>
-                    Secondary Type:
-                    <select
-                        value={pokemon.types[1]}
-                        onChange={event => handleChange({
-                            target: {
-                                name: event.target.name,
-                                value: [pokemon.types[0], event.target.value]
-                            }
-                        })}
-                        name='types'>
-                        {typesSelect.map((type, index) =>
-                            <option key={index} value={type}>{type}</option>
-                        )}
-                    </select>
-                </label>
-                <label>
-                    Height:
-                    <input
-                        value={pokemon.height}
-                        onChange={handleChange}
-                        name='height'
-                        type='number'
-                    />
-                </label>
-                <label>
-                    Weight:
-                    <input
-                        value={pokemon.weight}
-                        onChange={handleChange}
-                        name='weight'
-                        type='number'
-                    />
-                </label>
-                <label>
-                    Health:
-                    <input
-                        value={pokemon.health}
-                        onChange={handleChange}
-                        name='health'
-                        type='number'
-                    />
-                </label>
-                <label>
-                    Attack:
-                    <input
-                        value={pokemon.attack}
-                        onChange={handleChange}
-                        name='attack'
-                        type='number'
-                    />
-                </label>
-                <label>
-                    Defense:
-                    <input
-                        value={pokemon.defense}
-                        onChange={handleChange}
-                        name='defense'
-                        type='number'
-                    />
-                </label>
-                <label>
-                    Speed:
-                    <input
-                        value={pokemon.speed}
-                        onChange={handleChange}
-                        name='speed'
-                        type='number'
-                    />
-                </label>
-                {error}
-                <button type='submit'>
-                    <h2>Submit</h2>
-                </button>
-            </form>
+            <div className='Paper' style={{ width: 360 }}>
+                <form onSubmit={handleSubmit} style={{ display: 'grid' }}>
+                    <label>
+                        Name:
+                        <input
+                            value={pokemon.name}
+                            onChange={handleChange}
+                            name='name'
+                            type='text'
+                        />
+                    </label>
+                    <label>
+                        Pokedex Image Url:
+                        <input value={pokemon.imagePokedex}
+                            onChange={handleChange}
+                            name='imagePokedex'
+                            type='url'
+                        />
+                    </label>
+                    <label>
+                        Detail Image Url:
+                        <input
+                            value={pokemon.imageDetail}
+                            onChange={handleChange}
+                            name='imageDetail'
+                            type='url'
+                        />
+                    </label>
+                    <label>
+                        Primary Type:
+                        <select
+                            value={pokemon.types[0]}
+                            onChange={event => handleChange({
+                                target: {
+                                    name: event.target.name,
+                                    value: [event.target.value, pokemon.types[1]]
+                                }
+                            })}
+                            name='types'>
+                            {typesSelect.map((type, index) =>
+                                <option key={index} value={type}>{type}</option>
+                            )}
+                        </select>
+                    </label>
+                    <label>
+                        Secondary Type:
+                        <select
+                            value={pokemon.types[1]}
+                            onChange={event => handleChange({
+                                target: {
+                                    name: event.target.name,
+                                    value: [pokemon.types[0], event.target.value]
+                                }
+                            })}
+                            name='types'>
+                            {typesSelect.map((type, index) =>
+                                <option key={index} value={type}>{type}</option>
+                            )}
+                        </select>
+                    </label>
+                    <label>
+                        Height:
+                        <input
+                            value={pokemon.height}
+                            onChange={handleChange}
+                            name='height'
+                            type='number'
+                        />
+                    </label>
+                    <label>
+                        Weight:
+                        <input
+                            value={pokemon.weight}
+                            onChange={handleChange}
+                            name='weight'
+                            type='number'
+                        />
+                    </label>
+                    <label>
+                        Health:
+                        <input
+                            value={pokemon.health}
+                            onChange={handleChange}
+                            name='health'
+                            type='number'
+                        />
+                    </label>
+                    <label>
+                        Attack:
+                        <input
+                            value={pokemon.attack}
+                            onChange={handleChange}
+                            name='attack'
+                            type='number'
+                        />
+                    </label>
+                    <label>
+                        Defense:
+                        <input
+                            value={pokemon.defense}
+                            onChange={handleChange}
+                            name='defense'
+                            type='number'
+                        />
+                    </label>
+                    <label>
+                        Speed:
+                        <input
+                            value={pokemon.speed}
+                            onChange={handleChange}
+                            name='speed'
+                            type='number'
+                        />
+                    </label>
+                    <button type='submit'>
+                        <h2>Submit</h2>
+                    </button>
+                </form>
+            </div>
+            <div className='Paper'>
+                <h4>{error}</h4>
+            </div>
         </div>
     )
 }

@@ -1,8 +1,7 @@
 import React from 'react'
 
 export default function Filter({ name, all, state, setState }) {
-    // filtro reutilizable
-    // agregar className={} para cambiar los estilos
+    // filter Render
     return (
         <div className='Row Filter'>
             <h5 style={{ margin: 0, marginRight: 6, alignSelf: 'center' }}>{name}</h5>

@@ -27,3 +27,11 @@ export const typesSelect = [
     'bug', 'ghost', 'steel', 'fire', 'water', 'grass', 'electric', 'psychic',
     'ice', 'dragon', 'dark', 'fairy', 'shadow'
 ]
+
+export const typesColor = {
+    all: '#D9D9D9', normal: '#A8A77A', fighting: '#C22E28', flying: '#A98FF3',
+    poison: '#A33EA1', ground: '#E2BF65', rock: '#B6A136', bug: '#A6B91A',
+    ghost: '#735797', steel: '#B7B7CE', fire: '#ff6116', water: '#0066FF',
+    grass: '#9CFF19', electric: '#FFF818', psychic: '#F95587', ice: '#96D9D6',
+    dragon: '#6F35FC', dark: '#705746', fairy: '#D685AD', shadow: '#6F96B9'
+}
