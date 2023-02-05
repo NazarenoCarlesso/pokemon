@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { typesColor } from '../utils' // eslint-disable-line no-unused-vars
+// BACK API URL
+const BACK = process.env.REACT_APP_BACK
 
 export default function Detail() {
     // params Hook
@@ -11,7 +13,7 @@ export default function Detail() {
     const [pokemon, setPokemon] = useState({})
     // id Effect
     useEffect(() => {
-        fetch(`http://localhost:3001/pokemons/${id}`)
+        fetch(`${BACK}/pokemons/${id}`)
             .then(response => response.json())
             .then(data => setPokemon(data))
     }, [id])

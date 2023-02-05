@@ -9,13 +9,15 @@ import Create from './components/Create'
 import NavBar from './components/NavBar'
 import About from './components/About'
 import './App.css'
+// BACK API URL
+const BACK = process.env.REACT_APP_BACK
 
 function App() {
     // dispatch Hook
     const dispatch = useDispatch()
     // Load Pokemons Effect
     useEffect(() => {
-        fetch('http://localhost:3001/pokemons')
+        fetch(`${BACK}/pokemons`)
             .then(response => response.json())
             .then(pokemons => dispatch(pokemonsAll(pokemons)))
     }, [dispatch])
@@ -23,7 +25,7 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <NavBar/>
+                <NavBar />
                 <Switch>
                     <Route path='/home'><Home /></Route>
                     <Route path='/detail/:id'><Detail /></Route>

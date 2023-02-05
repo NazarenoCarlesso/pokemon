@@ -27,8 +27,14 @@ const reducer = (state = initialState, { type, payload }) => {
             if (payload === 'id -') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => b.id - a.id) }
             if (payload === 'name +') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.name > b.name ? 1 : -1) }
             if (payload === 'name -') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.name > b.name ? -1 : 1) }
+            if (payload === 'health +') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.health > b.health ? 1 : -1) }
+            if (payload === 'health -') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.health > b.health ? -1 : 1) }
             if (payload === 'attack +') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.attack > b.attack ? 1 : -1) }
             if (payload === 'attack -') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.attack > b.attack ? -1 : 1) }
+            if (payload === 'defense +') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.defense > b.defense ? 1 : -1) }
+            if (payload === 'defense -') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.defense > b.defense ? -1 : 1) }
+            if (payload === 'speed +') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.speed > b.speed ? 1 : -1) }
+            if (payload === 'speed -') return { ...state, pokemonFilter: state.pokemonFilter.sort((a, b) => a.speed > b.speed ? -1 : 1) }
             return { ...state }
         case 'CHANGE_PAGE':
             // console.log('pokemons page change')

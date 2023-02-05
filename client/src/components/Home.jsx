@@ -5,6 +5,8 @@ import { changePage, filterApi, filterOrder, filterRestart, filterType } from '.
 import { apis, orders, types } from '../utils'
 import Filter from './Filter'
 import Pokedex from './Pokedex'
+// BACK API URL
+const BACK = process.env.REACT_APP_BACK
 
 export default function Home() {
     // dispatch Hook
@@ -40,7 +42,7 @@ export default function Home() {
     }
     const handleSearch = async () => {
         setInput('')
-        const pokemon = await fetch(`http://localhost:3001/pokemons?name=${input.toLowerCase()}`)
+        const pokemon = await fetch(`${BACK}/pokemons?name=${input.toLowerCase()}`)
             .then(response => response.json())
             .then(data => data[0])
         // si el pokemon existe
@@ -53,6 +55,25 @@ export default function Home() {
         setApi('all')
         setOrder('id +')
     }
+    // results State
+    // selector Hook
+    const pokemonsFilter = useSelector(state => state.pokemonFilter.length)
+    const [results, setResults] = useState(pokemonsFilter)
+    useEffect(() => setResults(pokemonsFilter), [pokemonsFilter])
+    const [totalPages, setTotalPages] = useState([1])
+    useEffect(() => setTotalPages(Math.ceil(pokemonsFilter / 12)), [pokemonsFilter])
+    const [pages, setPages] = useState([1])
+    useEffect(() => {
+        const array = []
+        for (let i = 1; i <= totalPages; i++) array.push(i)
+        const left = page[0] <= 5
+        const right = totalPages - page[0] <= 4
+        // console.log(`left: ${left}, right: ${right}`)
+        if (!left && !right) setPages(array.slice(page[0] - 5, page[0] + 4))
+        if (left && !right) setPages(array.slice(0, 9))
+        if (!left && right) setPages(array.slice(-9))
+        if (left && right) setPages(array)
+    }, [totalPages, page])
     // home Render
     return (
         <div className='Page'>
@@ -83,10 +104,18 @@ export default function Home() {
                         </div>
                     </div>
                     {/* paginado */}
-                    <div className='Paper Row' style={{ width: 360 }}>
-                        <button onClick={() => setPage([page[0] - 1])}>{'<'}</button>
-                        {page}
-                        <button onClick={() => setPage([page[0] + 1])}>{'>'}</button>
+                    <div className='Paper' style={{ width: 360 }}>
+                        <div className='Row' style={{ flexWrap: 'wrap', justifyContent: 'space-evenly' }}>
+                            <h5 style={{ fontWeight: 400 }}>Pokemons found: <b>{results}</b></h5>
+                            <h5 style={{ fontWeight: 400 }}>Total pages: <b>{totalPages}</b></h5>
+                        </div>
+                        <div className='Row'>
+                            <button onClick={() => setPage([page[0] - 1])}>{'<'}</button>
+                            {pages.map((page, index) =>
+                                <button key={index} onClick={() => setPage([page])} style={{ margin: '0px 6px' }} >{page}</button>
+                            )}
+                            <button onClick={() => setPage([page[0] + 1])}>{'>'}</button>
+                        </div>
                     </div>
                 </div>
                 <div style={{ height: 350 }}>

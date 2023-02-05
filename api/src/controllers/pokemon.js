@@ -19,7 +19,10 @@ const pokemonAll = async (req, res) => {
             id: data.id,
             name: data.name,
             imagePokedex: data.sprites.front_default,
+            health: data.stats[0].base_stat,
             attack: data.stats[1].base_stat,
+            defense: data.stats[2].base_stat,
+            speed: data.stats[5].base_stat,
             types: data.types.map(t => t.type.name)
         }))
     ))
@@ -32,6 +35,10 @@ const pokemonAll = async (req, res) => {
             id: data.id + Number(FETCH_LIMIT),
             name: data.name,
             imagePokedex: data.imagePokedex,
+            health: data.health,
+            attack: data.attack,
+            defense: data.defense,
+            speed: data.speed,
             types: data.types.map(t => t.dataValues.name)
         }))
     ))
