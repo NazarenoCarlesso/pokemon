@@ -35,12 +35,23 @@ export default function Home() {
     const handleChange = (event) => setInput(event.target.value)
     const handleKeyDown = async (event) => {
         if (event.key === 'Enter') {
-            const pokemon = await fetch(`http://localhost:3001/pokemons?name=${input}`)
-                .then(response => response.json())
-                .then(data => data[0])
-            // si el pokemon existe
-            if (pokemon) history.push(`/detail/${pokemon.id}`)
+            handleSearch()
         }
+    }
+    const handleSearch = async () => {
+        setInput('')
+        const pokemon = await fetch(`http://localhost:3001/pokemons?name=${input.toLowerCase()}`)
+            .then(response => response.json())
+            .then(data => data[0])
+        // si el pokemon existe
+        if (pokemon) history.push(`/detail/${pokemon.id}`)
+        else window.alert(`Sorry, we couldn't find the pokemon "${input}"`)
+    }
+    // reset Handler
+    const handleReset = () => {
+        setType('all')
+        setApi('all')
+        setOrder('id +')
     }
     // home Render
     return (
@@ -51,13 +62,25 @@ export default function Home() {
                     {/* search */}
                     <div className='Paper' style={{ width: 360 }}>
                         <h5 style={{ margin: 0, marginBottom: 6 }}>Search a pokemon by it's name</h5>
-                        <input value={input} onChange={handleChange} onKeyDown={handleKeyDown} />
+                        <div className='Row'>
+                            <input className='Input' value={input} type='search'
+                                onChange={handleChange} onKeyDown={handleKeyDown}
+                                style={{ marginRight: 10, flexGrow: 1 }} />
+                            <button className='Button' onClick={handleSearch}>
+                                <h4>SEARCH</h4>
+                            </button>
+                        </div>
                     </div>
                     {/* filtros */}
                     <div className='Paper' style={{ width: 360 }}>
                         <Filter name='Type' all={types} state={type} setState={setType} />
                         <Filter name='API' all={apis} state={api} setState={setApi} />
                         <Filter name='Order' all={orders} state={order} setState={setOrder} />
+                        <div className='Center'>
+                            <button className='Button' onClick={handleReset}>
+                                <h4>RESET</h4>
+                            </button>
+                        </div>
                     </div>
                     {/* paginado */}
                     <div className='Paper Row' style={{ width: 360 }}>

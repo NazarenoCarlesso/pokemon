@@ -36,28 +36,28 @@ export default function Detail() {
                     <div className='Row' style={{ alignItems: 'center' }}>
                         <h4 style={{ width: 70 }}>Health</h4>
                         <div className='BarContainer'>
-                            <div className='Bar' style={{ width: `${health / 300 * 100}%`, height: '100%', backgroundColor: `${types ? typesColor[types[0]] : 'blue'}` }} />
+                            <div className='Bar' style={{ width: `${health / 300 * 100}%`, height: '100%', backgroundColor: `${types ? typesColor[types[0]] : '#0066ff'}` }} />
                         </div>
                         <h2>{health}</h2>
                     </div>
                     <div className='Row' style={{ alignItems: 'center' }}>
                         <h4 style={{ width: 70 }}>Attack</h4>
                         <div className='BarContainer'>
-                            <div className='Bar' style={{ width: `${attack / 300 * 100}%`, height: '100%', backgroundColor: `${types ? typesColor[types[0]] : 'blue'}` }} />
+                            <div className='Bar' style={{ width: `${attack / 300 * 100}%`, height: '100%', backgroundColor: `${types ? typesColor[types[0]] : '#0066ff'}` }} />
                         </div>
                         <h2>{attack}</h2>
                     </div>
                     <div className='Row' style={{ alignItems: 'center' }}>
                         <h4 style={{ width: 70 }}>Defense</h4>
                         <div className='BarContainer'>
-                            <div className='Bar' style={{ width: `${defense / 300 * 100}%`, height: '100%', backgroundColor: `${types ? typesColor[types[0]] : 'blue'}` }} />
+                            <div className='Bar' style={{ width: `${defense / 300 * 100}%`, height: '100%', backgroundColor: `${types ? typesColor[types[0]] : '#0066ff'}` }} />
                         </div>
                         <h2>{defense}</h2>
                     </div>
                     <div className='Row' style={{ alignItems: 'center' }}>
                         <h4 style={{ width: 70 }}>Speed</h4>
                         <div className='BarContainer'>
-                            <div className='Bar' style={{ width: `${speed / 300 * 100}%`, height: '100%', backgroundColor: `${types ? typesColor[types[0]] : 'blue'}` }} />
+                            <div className='Bar' style={{ width: `${speed / 300 * 100}%`, height: '100%', backgroundColor: `${types ? typesColor[types[0]] : '#0066ff'}` }} />
                         </div>
                         <h2>{speed}</h2>
                     </div>

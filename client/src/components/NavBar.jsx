@@ -3,9 +3,12 @@ import { NavLink } from 'react-router-dom'
 
 export default function NavBar() {
     return (
-        <div style={{ position: 'fixed', top: 0, width: '100%' }}>
-            <div className='Row' style={{ backgroundColor: '#001b3c' }}>
-                <h3 style={{ flexGrow: 1 }}>POKEMON</h3>
+        <div className='NavBar'>
+            <div className='Row'>
+                {/* Logo */}
+                <img className='Logo' src='img/logo.svg' alt='logo' />
+                <div style={{ flexGrow: 0 }} />
+                {/* Navigate */}
                 <NavLink to='/home'>
                     <h3>Home</h3>
                 </NavLink>

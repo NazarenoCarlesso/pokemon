@@ -50,6 +50,7 @@ export default function Create() {
                     <label>
                         Name:
                         <input
+                            className='Input'
                             value={pokemon.name}
                             onChange={handleChange}
                             name='name'
@@ -58,7 +59,9 @@ export default function Create() {
                     </label>
                     <label>
                         Pokedex Image Url:
-                        <input value={pokemon.imagePokedex}
+                        <input
+                            className='Input'
+                            value={pokemon.imagePokedex}
                             onChange={handleChange}
                             name='imagePokedex'
                             type='url'
@@ -67,6 +70,7 @@ export default function Create() {
                     <label>
                         Detail Image Url:
                         <input
+                            className='Input'
                             value={pokemon.imageDetail}
                             onChange={handleChange}
                             name='imageDetail'
@@ -108,6 +112,7 @@ export default function Create() {
                     <label>
                         Height:
                         <input
+                            className='Input'
                             value={pokemon.height}
                             onChange={handleChange}
                             name='height'
@@ -117,6 +122,7 @@ export default function Create() {
                     <label>
                         Weight:
                         <input
+                            className='Input'
                             value={pokemon.weight}
                             onChange={handleChange}
                             name='weight'
@@ -126,6 +132,7 @@ export default function Create() {
                     <label>
                         Health:
                         <input
+                            className='Input'
                             value={pokemon.health}
                             onChange={handleChange}
                             name='health'
@@ -135,6 +142,7 @@ export default function Create() {
                     <label>
                         Attack:
                         <input
+                            className='Input'
                             value={pokemon.attack}
                             onChange={handleChange}
                             name='attack'
@@ -144,6 +152,7 @@ export default function Create() {
                     <label>
                         Defense:
                         <input
+                            className='Input'
                             value={pokemon.defense}
                             onChange={handleChange}
                             name='defense'
@@ -153,13 +162,14 @@ export default function Create() {
                     <label>
                         Speed:
                         <input
+                            className='Input'
                             value={pokemon.speed}
                             onChange={handleChange}
                             name='speed'
                             type='number'
                         />
                     </label>
-                    <button type='submit'>
+                    <button className='Button' type='submit'>
                         <h2>Submit</h2>
                     </button>
                 </form>
