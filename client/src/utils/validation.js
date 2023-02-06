@@ -1,4 +1,4 @@
-const regexAlphabet = /^[a-zA-Z ]*$/
+export const regexAlphabet = /^[a-zA-Z ]*$/
 
 export default function validate(pokemon) {
     const { name, imagePokedex, imageDetail, types, height,
