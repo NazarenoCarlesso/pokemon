@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -L",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "test": "mocha -w --timeout 20000 ./tests/**/*.spec.js",
+    "test-models": "mocha -w --timeout 20000 ./tests/models/*.spec.js",
+    "test-routes": "mocha -w --timeout 20000 ./tests/routes/*.spec.js"
   },
   "author": "Henry",
   "license": "ISC",

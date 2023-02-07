@@ -14,9 +14,16 @@ export default function Detail() {
     // id Effect
     useEffect(() => {
         fetch(`${BACK}/pokemons/${id}`)
-            .then(response => response.json())
-            .then(data => setPokemon(data))
-    }, [id])
+            .then(response => {
+                if (!response.ok) throw new Error(response.statusText)
+                return response.json()
+            })
+            .catch(error => {
+                window.alert(error)
+                history.goBack()
+            })
+            .then(data => data ? setPokemon(data) : null)
+    }, [history, id])
     // pokemon Destructuring
     const { name, imageDetail, types, height, weight, health, attack, defense, speed } = pokemon
     // detail Render

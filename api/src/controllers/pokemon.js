@@ -42,7 +42,12 @@ const pokemonAll = async (req, res) => {
             types: data.types.map(t => t.dataValues.name)
         }))
     ))
-    if (name) return res.status(200).json(pokemons.filter(p => p.name === name))
+    if (name) {
+        const pokemon = pokemons.filter(p => p.name === name.toLowerCase())
+        return pokemon.length > 0
+            ? res.status(200).json(pokemon)
+            : res.status(404).json({ msg: `There is no pokémon named ${name}` })
+    }
     // respondemos con el arreglo de pokemons ORDENADO por ID
     res.status(200).json(pokemons.sort((a, b) => a.id - b.id))
 }
@@ -52,32 +57,36 @@ const pokemonById = async (req, res) => {
     // extraemos el pokemon fuera del if
     let pokemon
     // determina donde hay que buscarlo
-    if (id > Number(FETCH_LIMIT)) { // en DB
-        pokemon = await Pokemon.findByPk(Number(id) - Number(FETCH_LIMIT))
-            .then(pokemon => pokemon.getTypes()
-                .then(types => ({ ...pokemon.dataValues, types: types }))
+    try {
+        if (id > Number(FETCH_LIMIT)) { // en DB
+            pokemon = await Pokemon.findByPk(Number(id) - Number(FETCH_LIMIT))
+                .then(pokemon => pokemon.getTypes()
+                    .then(types => ({ ...pokemon.dataValues, types: types }))
+                    .then(data => ({
+                        ...data,
+                        id: data.id + Number(FETCH_LIMIT),
+                        types: data.types.map(t => t.dataValues.name)
+                    }))
+                )
+        } else { // en API
+            pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+                .then(response => response.json())
                 .then(data => ({
-                    ...data,
-                    id: data.id + Number(FETCH_LIMIT),
-                    types: data.types.map(t => t.dataValues.name)
+                    id: data.id,
+                    name: data.name,
+                    height: data.height,
+                    weight: data.weight,
+                    imagePokedex: data.sprites.front_default,
+                    imageDetail: data.sprites.other.home.front_default,
+                    types: data.types.map(t => t.type.name),
+                    health: data.stats[0].base_stat,
+                    attack: data.stats[1].base_stat,
+                    defense: data.stats[2].base_stat,
+                    speed: data.stats[5].base_stat
                 }))
-            )
-    } else { // en API
-        pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-            .then(response => response.json())
-            .then(data => ({
-                id: data.id,
-                name: data.name,
-                height: data.height,
-                weight: data.weight,
-                imagePokedex: data.sprites.front_default,
-                imageDetail: data.sprites.other.home.front_default,
-                types: data.types.map(t => t.type.name),
-                health: data.stats[0].base_stat,
-                attack: data.stats[1].base_stat,
-                defense: data.stats[2].base_stat,
-                speed: data.stats[5].base_stat
-            }))
+        }
+    } catch (error) {
+        res.status(400).json({ msg: `There is no pokémon with the id ${id}` })
     }
     // respondemos con el pokemon encontrado
     res.status(200).json(pokemon)
@@ -87,17 +96,23 @@ const pokemonCreate = async (req, res) => {
     // debo recibir los parametros en el body de la request
     const { name, height, weight, imagePokedex, imageDetail,
         health, attack, defense, speed, types } = req.body
+
     // creo un pokemon con los datos
-    const newPokemon = await Pokemon.create({
-        name, height, weight, imagePokedex, imageDetail,
-        health, attack, defense, speed
-    })
+    let newPokemon
+    try {
+        newPokemon = await Pokemon.create({
+            name: name.toLowerCase(), height, weight, imagePokedex, imageDetail,
+            health, attack, defense, speed
+        })
+    } catch (error) {
+        return res.status(400).json({ msg: error.message })
+    }
     // le agrego al pokemon los distintos tipos
-    Promise.all(
-        types.map(type => Type.findOne({ where: { name: type } })
-            .then(type => type.dataValues.id)
-            .then(id => newPokemon.addType(id, { through: 'pokemon_type' })))
-    )
+    if (!types || types.length === 0) return res.status(400).json({ msg: 'Pokemon must have at least one type' })
+    await Promise.all(types.map(type => Type.findOne({ where: { name: type } })))
+        .then(types => types.filter(t => t))
+        .then(types => types.map(type => type.dataValues.id))
+        .then(types => types.map(id => newPokemon.addType(id, { through: 'pokemon_type' })))
     // respondemos con el pokemon creado
     res.status(201).json(newPokemon)
 }

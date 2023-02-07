@@ -17,10 +17,15 @@ export default function validate(pokemon) {
     // Stats Validations
     if (height !== '' && height <= 0) return 'Height should be a positive value'
     if (weight !== '' && weight <= 0) return 'Weight should be a positive value'
+    //
     if (health !== '' && health <= 0) return 'Health should be a positive value'
+    if (health !== '' && health > 300) return 'Health should be a less than 300'
     if (attack !== '' && attack <= 0) return 'Attack should be a positive value'
+    if (attack !== '' && attack > 300) return 'Attack should be a less than 300'
     if (defense !== '' && defense <= 0) return 'Defense should be a positive value'
+    if (defense !== '' && defense > 300) return 'Defense should be a less than 300'
     if (speed !== '' && speed <= 0) return 'Speed should be a positive value'
+    if (speed !== '' && speed > 300) return 'Speed should be a less than 300'
     // Everything is valid
     return false
 }
