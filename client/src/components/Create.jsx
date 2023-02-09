@@ -46,7 +46,7 @@ export default function Create() {
     // create Render
     return (
         <div className='Page'>
-            <h1>Create Pokemon</h1>
+            <h1>CREATE</h1>
             <div className='Paper Center' style={{ width: 360 }}>
                 <form onSubmit={handleSubmit} style={{ display: 'grid' }}>
                     <label className='Label'>

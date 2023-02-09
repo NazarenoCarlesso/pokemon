@@ -26,7 +26,15 @@ button {
   align-items: center;
 }
 
+h1 {
+  margin: 0px;
+}
+
 h2 {
+  margin: 0px;
+}
+
+h3 {
   margin: 0px;
 }
 
@@ -41,4 +49,8 @@ h5 {
 label {
   display: flex;
   flex-wrap: wrap;
+}
+
+hr {
+  border-color: #0066ff38;
 }

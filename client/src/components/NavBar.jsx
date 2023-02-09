@@ -9,13 +9,13 @@ export default function NavBar() {
                 <img className='Logo' src='img/logo.svg' alt='logo' />
                 <div style={{ flexGrow: 0 }} />
                 {/* Navigate */}
-                <NavLink to='/home'>
+                <NavLink className='NavH' to='/home'>
                     <h3>Home</h3>
                 </NavLink>
-                <NavLink to='/create'>
+                <NavLink className='NavH' to='/create'>
                     <h3>Create</h3>
                 </NavLink>
-                <NavLink to='/about'>
+                <NavLink className='NavH' to='/about'>
                     <h3>About</h3>
                 </NavLink>
             </div>

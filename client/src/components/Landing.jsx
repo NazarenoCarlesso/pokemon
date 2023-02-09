@@ -3,18 +3,22 @@ import { Link } from 'react-router-dom'
 export default function Landing() {
     return (
         <div className='Page'>
+            <div style={{ minHeight: 50 }} />
             <div className='Row Center'>
                 <div>
-                    <h1 style={{ fontSize: '3rem' }}>Gotta Catch Them All!</h1>
+                    <img className='Squirtle' src='img/squirtle.png' alt='squirtle' />
+                </div>
+                <div className='Center' style={{ flexDirection: 'column', height: 430, justifyContent: 'start' }}>
+                    <h1 className='Main'>Gotta Catch Them All!</h1>
+                    <h2 className='Neon'>POKEMON POKEDEX</h2>
+                    <h4 className='Lore'>Welcome trainer, this will be the beginning of an incredible adventure. Together we will visit all the pokemon towns. Learning about your pokemons is an essential step to succeed in your tournaments and be able to get all the badges</h4>
+                    <h4 className='Lore2'>Take a look at our pokedex, it has over 900+ pokemons with 20 different types</h4>
                     <Link to='/home'>
                         <button className='Discover'>
                             <img src='img/pokeball_icon.png' alt='pokeball_icon' style={{ height: 18, marginRight: 6 }} />
                             DISCOVER
                         </button>
                     </Link>
-                </div>
-                <div>
-                    <img src='img/lucario.png' alt='lucario' />
                 </div>
             </div>
         </div>

@@ -19,20 +19,6 @@
   justify-content: center;
 }
 
-.Discover {
-  border-radius: 3rem;
-  border: 1px solid white;
-  font-size: 1.2rem;
-  letter-spacing: 1.6px;
-  padding: 10px 16px;
-}
-
-.PokemonBar {
-  background-color: black;
-  color: whitesmoke;
-  padding: 4px;
-}
-
 .PokemonBar h1 {
   font-weight: 400;
 }
@@ -101,9 +87,10 @@
 }
 
 .Logo {
-  height: 50px;
+  height: 40px;
   margin: 0px 6px;
   margin-left: 10px;
+  padding-right: 6px;
 }
 
 .NavBar {
@@ -201,4 +188,76 @@
 
 .Current {
   background-color: #00306b;
+}
+
+.Squirtle {
+  width: 600px;
+}
+
+.Main {
+  color: #79afff;
+  font-size: 4rem;
+  text-shadow: -6px 12px 10px #000000ad, 0px 0px 12px #0066ff6c;
+  margin: 10px 0px;
+}
+
+.Lore {
+  color: #81a2d2;
+  width: 700px;
+  text-align: center;
+  text-shadow: -6px 12px 10px #00000060;
+}
+
+.Lore2 {
+  color: #5173a6;
+  width: 700px;
+  text-align: center;
+  text-shadow: -6px 12px 10px #00000048;
+  margin-top: 20px;
+}
+
+.Discover {
+  border-radius: 3rem;
+  background-color: transparent;
+  border: 1px solid white;
+  font-size: 1.2rem;
+  letter-spacing: 1.6px;
+  padding: 10px 16px;
+  box-shadow: -6px 12px 10px #00000046;
+  margin-top: 32px;
+}
+
+.Discover:hover {
+  border: 1px solid #cc1f1f;
+  background-color: #770909;
+  box-shadow: -6px 12px 10px #00000046, 0px 0px 16px 4px #cc1f1fb6;
+}
+
+.Arrow {
+  border-radius: 3rem;
+  background-color: transparent;
+  border: 1px solid white;
+  box-shadow: -6px 12px 10px #00000046;
+}
+
+.Arrow:hover {
+  border: 1px solid #cc1f1f;
+  background-color: #770909;
+  box-shadow: -6px 12px 10px #00000046, 0px 0px 16px 4px #cc1f1fb6;
+}
+
+.NavH {
+  padding: 0px 6px;
+}
+
+.NavH h3 {
+  margin: 10px 0px;
+}
+
+.Neon {
+  color: #cc1f1f;
+  text-shadow: 0px 0px 12px #cc1f1f;
+  word-spacing: 10px;
+  letter-spacing: 6px;
+  margin-bottom: 16px;
 }

@@ -87,7 +87,7 @@ export default function Home() {
     // home Render
     return (
         <div className='Page'>
-            <h1>Home</h1>
+            <h1>POKEDEX</h1>
             <div className='Row'>
                 <div>
                     {/* search */}
