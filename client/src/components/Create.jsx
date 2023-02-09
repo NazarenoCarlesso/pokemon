@@ -182,7 +182,7 @@ export default function Create() {
                         </label>
                     </div>
                     <div className='Center'>
-                        <button className='Button' type='submit'>
+                        <button className='Button' type='submit' disabled={error} >
                             <h2 style={{ fontWeight: 400 }}>SUBMIT</h2>
                         </button>
                     </div>

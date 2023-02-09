@@ -37,16 +37,29 @@ describe('Pokemon routes', () => {
   })
 
   describe('POST /pokemons', () => {
+    // pokemon valido
     it('should get 201', () => agent.post('/pokemons')
-      .send({ name: 'lucario', types: ['shadow, fire'] })
+      .send({ name: 'lucario', types: ['shadow', 'fire'] })
       .set('Content-Type', 'application/json')
       .expect(201))
+    // el pokemon ya existe
     it('should get 400', () => agent.post('/pokemons')
-      .send({ name: 'lucario' })
+      .send({ name: 'pikachu', types: ['shadow', 'fire'] })
       .set('Content-Type', 'application/json')
       .expect(400))
+    // falta el nombre
     it('should get 400', () => agent.post('/pokemons')
-      .send({ name: 'lucario', types: [] })
+      .send({ types: ['shadow', 'fire'] })
+      .set('Content-Type', 'application/json')
+      .expect(400))
+    // falta tipos
+    it('should get 400', () => agent.post('/pokemons')
+      .send({ name: 'pikachu', types: [] })
+      .set('Content-Type', 'application/json')
+      .expect(400))
+    // tiene mas de 2 tipos
+    it('should get 400', () => agent.post('/pokemons')
+      .send({ name: 'charizard', types: ['fire', 'water', 'fairy', 'ice'] })
       .set('Content-Type', 'application/json')
       .expect(400))
   })
