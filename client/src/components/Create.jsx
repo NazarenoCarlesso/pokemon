@@ -59,6 +59,7 @@ export default function Create() {
                             type='text'
                         />
                     </label>
+                    <hr />
                     <label className='Label Large'>
                         <span>Pokedex Image Url:</span>
                         <input
@@ -79,6 +80,7 @@ export default function Create() {
                             type='url'
                         />
                     </label>
+                    <hr />
                     <div className='Row'>
                         <label className='Label'>
                             <span>Primary:</span>
@@ -181,15 +183,18 @@ export default function Create() {
                             />
                         </label>
                     </div>
-                    <div className='Center'>
-                        <button className='Button' type='submit' disabled={error} >
-                            <h2 style={{ fontWeight: 400 }}>SUBMIT</h2>
-                        </button>
-                    </div>
                 </form>
             </div>
-            <div className='Paper'>
-                <h4>{error}</h4>
+            <div>
+                
+                <div className='Center'>
+                    <button className='Submit' type='submit' disabled={error} >
+                        <h2 style={{ fontWeight: 400 }}>SUBMIT</h2>
+                    </button>
+                </div>
+                <div className='Center Validate'>
+                    <h4 className={error ? 'Error' : 'Success'}>{error ? error : ''}</h4>
+                </div>
             </div>
         </div>
     )

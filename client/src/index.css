@@ -52,5 +52,6 @@ label {
 }
 
 hr {
+  width: 100%;
   border-color: #0066ff38;
 }

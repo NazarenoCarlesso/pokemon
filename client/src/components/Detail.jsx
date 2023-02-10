@@ -56,8 +56,8 @@ export default function Detail() {
                         <h2>Types</h2>
                         <div className='Row' style={{ width: '100%', flexWrap: 'wrap', justifyContent: 'space-evenly', marginTop: 10, marginBottom: 10 }} >
                             {types ? types.map((type, index) =>
-                                <div className='Row'>
-                                    <div key={index} className='Type Row' style={{ backgroundColor: typesColor[type], boxShadow: `0px 0px 4px 1px ${typesColor[type]}7e` }}>
+                                <div className='Row' key={index} >
+                                    <div className='Type Row' style={{ backgroundColor: typesColor[type], boxShadow: `0px 0px 4px 1px ${typesColor[type]}7e` }}>
                                         <img src={`../img/types/${type}.svg`} alt={type} style={{ width: 24 }} />
                                     </div>
                                     <h2 style={{ marginLeft: 6, color: `${typesColor[type]}` }}>{type}</h2>
@@ -98,8 +98,9 @@ export default function Detail() {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <img src={imageDetail} alt={name} />
+                <div style={{ margin: 20, display: `${pokemon.imageDetail ? 'block' : 'none'}` }}>
+                    <div className='Battle' />
+                    <img className='imageDetail' src={imageDetail} alt={name} />
                 </div>
             </div>
         </div>
