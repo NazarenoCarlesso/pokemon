@@ -1,4 +1,5 @@
 require('dotenv').config()
+const fetch = require('node-fetch')
 const { Pokemon, Type } = require('../db.js')
 // limita la cantidad de pokemons a traer de la API
 const { FETCH_LIMIT } = process.env

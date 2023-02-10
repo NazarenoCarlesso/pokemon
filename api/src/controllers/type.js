@@ -1,3 +1,4 @@
+const fetch = require('node-fetch')
 const { Type } = require('../db.js')
 
 const typeAllApi = async () => {
