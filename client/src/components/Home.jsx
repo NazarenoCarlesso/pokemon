@@ -87,7 +87,11 @@ export default function Home() {
     // home Render
     return (
         <div className='Page'>
-            <h1>POKEDEX</h1>
+            <div className='Row Center' style={{ width: '100%' }}>
+                <div className='Line' style={{ marginRight: 10 }} />
+                <h1 style={{ color: '#cc1f1f', textShadow: '0px 0px 12px #cc1f1f' }}>POKEDEX</h1>
+                <div className='Line' style={{ marginLeft: 10 }} />
+            </div>
             <div className='Row'>
                 <div>
                     {/* search */}
@@ -127,18 +131,22 @@ export default function Home() {
                 </div>
             </div>
             {/* paginado */}
-            <div className='Paper Center' style={{ width: 360, flexDirection: 'column' }}>
-                <div className='Row' style={{ flexWrap: 'wrap', justifyContent: 'space-evenly', width: '100%' }}>
-                    <h5 style={{ fontWeight: 400 }}>Pokemons found: <b>{results}</b></h5>
-                    <h5 style={{ fontWeight: 400 }}>Total pages: <b>{totalPages}</b></h5>
+            <div className='Row Center' style={{ width: '100%' }}>
+                <div className='Line' style={{ marginRight: 10 }} />
+                <div className='Paper Center' style={{ minWidth: 360, width: 360, flexDirection: 'column' }}>
+                    <div className='Row' style={{ flexWrap: 'wrap', justifyContent: 'space-evenly', width: '100%' }}>
+                        <h5 style={{ fontWeight: 400 }}>Pokemons found: <b>{results}</b></h5>
+                        <h5 style={{ fontWeight: 400 }}>Total pages: <b>{totalPages}</b></h5>
+                    </div>
+                    <div className='Row' style={{ marginTop: 6 }} >
+                        <button className='Paginate' onClick={handlePrevPage}>{'<'}</button>
+                        {pages.map((p, index) =>
+                            <button className={`Paginate ${p === page[0] ? 'Current' : ''}`} key={index} onClick={() => setPage([p])} >{p}</button>
+                        )}
+                        <button className='Paginate' onClick={handleNextPage}>{'>'}</button>
+                    </div>
                 </div>
-                <div className='Row' style={{ marginTop: 6 }} >
-                    <button className='Paginate' onClick={handlePrevPage}>{'<'}</button>
-                    {pages.map((p, index) =>
-                        <button className={`Paginate ${p === page[0] ? 'Current' : ''}`} key={index} onClick={() => setPage([p])} >{p}</button>
-                    )}
-                    <button className='Paginate' onClick={handleNextPage}>{'>'}</button>
-                </div>
+                <div className='Line' style={{ marginLeft: 10 }} />
             </div>
         </div>
     )

@@ -31,7 +31,7 @@ export default function Detail() {
         <div className='Page'>
             <div className='Row Center'>
                 <div>
-                    <div className='Paper Row'>
+                    <div className='Paper Row' style={{ width: 360 }}>
                         <div className='PokemonBar'>
                             <h1 style={{ margin: 0 }}>{name ? name.charAt(0).toUpperCase() + name.slice(1) : null} N.° {id}</h1>
                         </div>
@@ -100,7 +100,7 @@ export default function Detail() {
                 </div>
                 <div style={{ margin: 20, display: `${pokemon.imageDetail ? 'block' : 'none'}` }}>
                     <div className='Battle' />
-                    <img className='imageDetail' src={imageDetail} alt={name} />
+                    <img className='imgDetail' src={imageDetail} alt={name} />
                 </div>
             </div>
         </div>

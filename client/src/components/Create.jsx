@@ -33,10 +33,12 @@ export default function Create() {
     }
     // handle pokemon Submit
     const handleSubmit = (event) => {
+        console.log('submit')
         event.preventDefault()
         // error
         if (error) return window.alert(error)
         // valid
+        console.log('valid')
         fetch(`${BACK}/pokemons`, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
@@ -46,9 +48,13 @@ export default function Create() {
     // create Render
     return (
         <div className='Page'>
-            <h1>CREATE</h1>
+            <div className='Row Center' style={{ width: '100%' }}>
+                <div className='Line' style={{ marginRight: 10 }} />
+                <h1 style={{ color: '#cc1f1f', textShadow: '0px 0px 12px #cc1f1f' }}>CREATE</h1>
+                <div className='Line' style={{ marginLeft: 10 }} />
+            </div>
             <div className='Paper Center' style={{ width: 360 }}>
-                <form onSubmit={handleSubmit} style={{ display: 'grid' }}>
+                <form style={{ display: 'grid' }}>
                     <label className='Label'>
                         <span>Name:</span>
                         <input
@@ -185,12 +191,15 @@ export default function Create() {
                     </div>
                 </form>
             </div>
-            <div>
-                
-                <div className='Center'>
-                    <button className='Submit' type='submit' disabled={error} >
-                        <h2 style={{ fontWeight: 400 }}>SUBMIT</h2>
-                    </button>
+            <div style={{ width: '100%' }}>
+                <div className='Row Center' style={{ width: '100%' }}>
+                    <div className='Line' style={{ marginRight: 10 }} />
+                    <div className='Center'>
+                        <button className='Submit' onClick={handleSubmit} disabled={error ? true : false} >
+                            <h2 style={{ fontWeight: 400 }}>SUBMIT</h2>
+                        </button>
+                    </div>
+                    <div className='Line' style={{ marginLeft: 10 }} />
                 </div>
                 <div className='Center Validate'>
                     <h4 className={error ? 'Error' : 'Success'}>{error ? error : ''}</h4>

@@ -7,8 +7,8 @@ export default function Pokemon({ id, name, image, types }) {
     return (
         <div className='Pokemon'>
             <Link to={`/detail/${id}`}>
-                <h5 style={{ margin: 0 }} >{name}</h5>
-                <img src={image} alt={name} />
+                <h5 title={name} style={{ margin: 0 }} >{name}</h5>
+                <img className='imgPokedex' src={image} alt={name} />
                 <div className='Row' style={{ justifyContent: 'space-evenly', marginBottom: 4 }}>
                     {types.map((type, index) =>
                         <div key={index} className='Type' style={{ backgroundColor: typesColor[type], boxShadow: `0px 0px 4px 1px ${typesColor[type]}7e` }}>
