@@ -4,12 +4,13 @@ export default function About() {
     // about Render
     return (
         <div className='Page'>
+            <div className='Spacing'/>
             <div className='Row Center' style={{ width: '100%' }}>
                 <div className='Line' style={{ marginRight: 10 }} />
                 <h1 style={{ color: '#cc1f1f', textShadow: '0px 0px 12px #cc1f1f' }}>ABOUT</h1>
                 <div className='Line' style={{ marginLeft: 10 }} />
             </div>
-            <div className='Row'>
+            <div className='Row Three'>
                 <div className='Paper About'>
                     <h2 className=''>What is this?</h2>
                     <hr />

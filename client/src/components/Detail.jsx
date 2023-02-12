@@ -29,7 +29,8 @@ export default function Detail() {
     // detail Render
     return (
         <div className='Page'>
-            <div className='Row Center'>
+            <div className='Spacing'/>
+            <div className='Row Center Flex'>
                 <div>
                     <div className='Paper Row' style={{ width: 360 }}>
                         <div className='PokemonBar'>

@@ -87,12 +87,13 @@ export default function Home() {
     // home Render
     return (
         <div className='Page'>
+            <div className='Spacing'/>
             <div className='Row Center' style={{ width: '100%' }}>
                 <div className='Line' style={{ marginRight: 10 }} />
                 <h1 style={{ color: '#cc1f1f', textShadow: '0px 0px 12px #cc1f1f' }}>POKEDEX</h1>
                 <div className='Line' style={{ marginLeft: 10 }} />
             </div>
-            <div className='Row'>
+            <div className='Row Flex'>
                 <div>
                     {/* search */}
                     <div className='Paper Center' style={{ width: 360, height: 34 }}>
@@ -123,9 +124,9 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div style={{ height: 350 }}>
+                <div>
                     {/* pokedex */}
-                    <div className='Paper' style={{ width: 624, height: 312 }}>
+                    <div className='Paper Pokedex'>
                         <Pokedex pokemons={pokemons} />
                     </div>
                 </div>

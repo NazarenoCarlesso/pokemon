@@ -53,7 +53,7 @@ export default function Create() {
                 <h1 style={{ color: '#cc1f1f', textShadow: '0px 0px 12px #cc1f1f' }}>CREATE</h1>
                 <div className='Line' style={{ marginLeft: 10 }} />
             </div>
-            <div className='Paper Center' style={{ width: 360 }}>
+            <div className='Paper Center' style={{ width: 352 }}>
                 <form style={{ display: 'grid' }}>
                     <label className='Label'>
                         <span>Name:</span>

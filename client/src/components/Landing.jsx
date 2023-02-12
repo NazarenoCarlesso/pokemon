@@ -6,7 +6,7 @@ export default function Landing() {
             <div className='Bg' />
             <div className='Page' style={{ backdropFilter: 'blur(20px)' }} >
                 <div style={{ minHeight: 50 }} />
-                <div className='Row Center'>
+                <div className='Row Center Flex'>
                     <div>
                         <img className='Squirtle' src='img/squirtle.png' alt='squirtle' />
                     </div>
