@@ -32,18 +32,17 @@ export default function Create() {
         setPokemon({ ...pokemon, [name]: value })
     }
     // handle pokemon Submit
-    const handleSubmit = (event) => {
-        console.log('submit')
+    const handleSubmit = async (event) => {
         event.preventDefault()
         // error
         if (error) return window.alert(error)
         // valid
-        console.log('valid')
-        fetch(`${BACK}/pokemons`, {
+        await fetch(`${BACK}/pokemons`, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(postPokemon(pokemon))
         })
+        window.alert('Pokemon created')
     }
     // create Render
     return (
